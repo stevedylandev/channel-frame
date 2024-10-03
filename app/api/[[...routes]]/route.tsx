@@ -5,6 +5,7 @@ import { handle } from "frog/vercel";
 import { generateAuthToken } from "@/utils/authKey";
 
 const app = new Frog({
+	title: "Join Pinata",
 	basePath: "/api",
 });
 
