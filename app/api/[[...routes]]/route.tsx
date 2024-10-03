@@ -24,6 +24,10 @@ app.frame("/", (c) => {
 });
 
 app.frame("/join", async (c) => {
+	const isMemberReq = await fetch(
+		`https://api.warpcast.com/fc/channel-members?channelId=${config.channel}&${c.frameData?.fid}`,
+	);
+
 	const authToken = await generateAuthToken();
 
 	console.log(authToken);
@@ -35,7 +39,7 @@ app.frame("/join", async (c) => {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify({
-			channelId: "pinata",
+			channelId: config.channel,
 			inviteFid: c.frameData?.fid,
 			role: "member",
 		}),
