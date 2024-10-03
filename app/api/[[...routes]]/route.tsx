@@ -1,13 +1,14 @@
 /** @jsxImportSource frog/jsx */
 
-import { Button, Frog, TextInput } from "frog";
+import { Button, Frog } from "frog";
 import { handle } from "frog/vercel";
 import { generateAuthToken } from "@/utils/authKey";
+import { config } from "@/config";
 
 export const dynamic = "force-dynamic";
 
 const app = new Frog({
-	title: "Join Pinata",
+	title: config.title,
 	basePath: "/api",
 });
 
@@ -17,8 +18,7 @@ const app = new Frog({
 app.frame("/", (c) => {
 	return c.res({
 		action: "/join",
-		image:
-			"https://dweb.mypinata.cloud/ipfs/QmWnDf7iM4H9EJJLnW7tjaHgkHVPCWwcPSaM8TCfvBDjtP?img-format=webp",
+		image: config.startImage,
 		intents: [<Button>Request to Join</Button>],
 	});
 });
@@ -50,16 +50,14 @@ app.frame("/join", async (c) => {
 	) {
 		return c.res({
 			action: "/join",
-			image:
-				"https://dweb.mypinata.cloud/ipfs/QmZfCdDqsMfm9KWH5kPmJsD27vgWTmdhMZFzGMmSaQK9YQ?img-format=webp",
+			image: config.mustFollowImage,
 			intents: [<Button>Try Again</Button>],
 		});
 	}
 
 	if (joinRes.result && joinRes.result.success) {
 		return c.res({
-			image:
-				"https://dweb.mypinata.cloud/ipfs/QmREw24yRCLAX7aESuPmhGyqNBqtx7cxxnGgFVYeoaD5A9?img-format=webp",
+			image: config.successImage,
 			intents: [
 				<Button.Link href="https://github.com/stevedylandev/channel-frame">
 					Source Code
@@ -70,8 +68,7 @@ app.frame("/join", async (c) => {
 
 	return c.res({
 		action: "/join",
-		image:
-			"https://dweb.mypinata.cloud/ipfs/QmVaSL2BBagzatjQ8RYJVLQ1ooVYtpt8dwJVqujBJBtLUT?img-format=webp",
+		image: config.errorImage,
 		intents: [<Button>Try Again</Button>],
 	});
 });
