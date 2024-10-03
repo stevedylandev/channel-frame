@@ -4,6 +4,8 @@ import { Button, Frog, TextInput } from "frog";
 import { handle } from "frog/vercel";
 import { generateAuthToken } from "@/utils/authKey";
 
+export const dynamic = "force-dynamic";
+
 const app = new Frog({
 	title: "Join Pinata",
 	basePath: "/api",

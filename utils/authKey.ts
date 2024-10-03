@@ -23,6 +23,7 @@ export async function generateAuthToken() {
 		const signatureResult = await signer.signMessageHash(
 			Buffer.from(`${encodedHeader}.${encodedPayload}`, "utf-8"),
 		);
+		// @ts-ignore
 		const encodedSignature = Buffer.from(signatureResult.value).toString(
 			"base64url",
 		);
