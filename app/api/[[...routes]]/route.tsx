@@ -27,6 +27,18 @@ app.frame("/join", async (c) => {
 	const isMemberReq = await fetch(
 		`https://api.warpcast.com/fc/channel-members?channelId=${config.channel}&${c.frameData?.fid}`,
 	);
+	const isMemeberRes = await isMemberReq.json();
+
+	if (isMemeberRes.result.members.length > 0) {
+		return c.res({
+			image: config.successImage,
+			intents: [
+				<Button.Link href="https://github.com/stevedylandev/channel-frame">
+					Source Code
+				</Button.Link>,
+			],
+		});
+	}
 
 	const authToken = await generateAuthToken();
 
