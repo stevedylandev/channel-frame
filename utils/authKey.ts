@@ -1,9 +1,11 @@
 import { NobleEd25519Signer } from "@farcaster/hub-nodejs";
 export async function generateAuthToken() {
 	try {
-		const fid = process.env.MOD_FID;
-		const privateKey = process.env.MOD_PRIVATE_KEY as unknown as Uint8Array;
-		const publicKey = process.env.MOD_PUBLIC_KEY;
+		const fid = Number.parseInt(process.env.MOD_FID as string);
+		const privateKey =
+			`${process.env.MOD_PRIVATE_KEY}` as unknown as Uint8Array;
+		const publicKey = `${process.env.MOD_PUBLIC_KEY}`;
+
 		const signer = new NobleEd25519Signer(privateKey);
 
 		const header = {
